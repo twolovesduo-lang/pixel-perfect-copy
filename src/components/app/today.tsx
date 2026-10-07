@@ -30,7 +30,7 @@ export function useToday(db: DB) {
   };
 }
 
-function Row({ left, mid, right, onClick, late }: { left: string; mid?: string; right?: React.ReactNode; onClick?: () => void; late?: boolean }) {
+function Row({ left, mid, right, onClick, late }: { left: string; mid?: string | undefined; right?: React.ReactNode; onClick?: () => void; late?: boolean | undefined }) {
   return (
     <button onClick={onClick} className="flex w-full items-center gap-2 border-b px-3 py-1.5 text-left text-[12.5px] last:border-0 hover:bg-accent/50">
       <span className="min-w-0 flex-1 truncate font-medium">{left}</span>

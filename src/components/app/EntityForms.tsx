@@ -147,7 +147,7 @@ function defaults(kind: FormKind): Record<string, unknown> {
   } as Record<string, Record<string, unknown>>)[kind] ?? {};
 }
 
-function afterSave(kind: FormKind, v: Record<string, unknown>, isNew: boolean) {
+function afterSave(kind: FormKind, v: any, isNew: boolean) {
   const db = store.get()!;
   const opp = v.opportunityId ? db.opportunities.find((o) => o.id === v.opportunityId) : undefined;
   if (kind === "prospect" && isNew) {
@@ -179,7 +179,7 @@ export function FormsProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const openForm = useCallback((kind: FormKind, initial: Record<string, unknown> = {}) => {
     const init = { ...defaults(kind), ...initial };
-    if ("stage" in init) init.stage = String(init.stage);
+    if ("stage" in init) (init as any).stage = String((init as any).stage);
     setState({ kind, initial: init });
     setOpen(true);
   }, []);
@@ -204,7 +204,7 @@ function FormHost({ kind, initial, open, setOpen }: { kind: FormKind; initial: R
       initial={initial}
       onSubmit={(raw) => {
         try {
-          const v: Record<string, unknown> = { ...raw };
+          const v: any = { ...raw };
           if (kind === "opportunity") {
             v.stage = Number(v.stage);
             if (!v.faucetId) v.faucetId = db.prospects.find((p) => p.id === v.prospectId)?.faucetId ?? "";
@@ -221,9 +221,9 @@ function FormHost({ kind, initial, open, setOpen }: { kind: FormKind; initial: R
             v.icp = v.icp || sku?.icp || "";
             v.channel = v.channel || sku?.channel || "";
           }
-          const saved = upsert(COLLECTION[kind], v as never) as unknown as Record<string, unknown>;
+          const saved = upsert(COLLECTION[kind], v as never) as any;
           afterSave(kind, { ...v, id: saved.id }, isNew);
-          toast.success(`${LABEL[kind][0].toUpperCase() + LABEL[kind].slice(1)} ${isNew ? "criada(o)" : "atualizada(o)"}`);
+          toast.success(`${LABEL[kind].charAt(0).toUpperCase() + LABEL[kind].slice(1)} ${isNew ? "criada(o)" : "atualizada(o)"}`);
           setOpen(false);
         } catch (e) {
           console.error(e);
