@@ -34,7 +34,7 @@ function Hoje() {
           className="space-y-2 p-3"
           onSubmit={(e) => {
             e.preventDefault();
-            if (!text.trim()) return toast.error("Escreva o que foi feito.");
+            if (!text.trim()) { toast.error("Escreva o que foi feito."); return; }
             upsert("dailyLogs", { date: todayISO(), owner, text: text.trim() });
             setText("");
             toast.success("Registro diário salvo");

@@ -58,7 +58,7 @@ function Metas() {
             className="space-y-2 p-3"
             onSubmit={(e) => {
               e.preventDefault();
-              if ([form.monthly, form.weekly, form.daily].some((n) => !(n >= 0))) return toast.error("Valores inválidos");
+              if ([form.monthly, form.weekly, form.daily].some((n) => !(n >= 0))) { toast.error("Valores inválidos"); return; }
               saveGoals(form);
               toast.success("Metas salvas");
             }}

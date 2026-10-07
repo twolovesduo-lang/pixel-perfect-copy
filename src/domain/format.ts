@@ -25,7 +25,7 @@ export const addDays = (iso: string, days: number) => {
 export const fmtDate = (iso?: string) => {
   if (!iso) return "—";
   const [y, m, d] = iso.slice(0, 10).split("-");
-  return `${d}/${m}${y !== String(new Date().getFullYear()) ? "/" + y.slice(2) : ""}`;
+  return `${d}/${m}${y! !== String(new Date().getFullYear()) ? "/" + y!.slice(2) : ""}`;
 };
 export const uid = () =>
   typeof crypto !== "undefined" && "randomUUID" in crypto

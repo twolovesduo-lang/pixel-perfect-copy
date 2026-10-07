@@ -89,28 +89,28 @@ export function createSeed(): DB {
   let n = 0;
 
   FAUCETS.forEach(([name, skuIdx, decision, hours, stages], fi) => {
-    const sku = skus[skuIdx];
+    const sku = skus[skuIdx]!;
     const fid = `f${fi}`;
     faucets.push({ ...base(fid), name, skuId: sku.id, icp: sku.icp, channel: sku.channel, decision, notes: "" });
     activities.push({
-      ...base(`a-h${fi}`), type: "horas", date: addDays(today, -3), owner: OWNERS[fi % 3],
+      ...base(`a-h${fi}`), type: "horas", date: addDays(today, -3), owner: OWNERS[fi % 3]!,
       description: "Horas de operação acumuladas (DEMO)", faucetId: fid, hours,
     });
     stages.forEach((stage, si) => {
       const i = n++;
       const pid = `p${i}`;
       const oid = `o${i}`;
-      const company = `${A[i % A.length]} ${B[(i * 5) % B.length]}`;
-      const owner = OWNERS[i % 3];
+      const company = `${A[i % A.length]!} ${B[(i * 5) % B.length]!}`;
+      const owner = OWNERS[i % 3]!;
       const priority = stage >= 5 ? "A" : stage >= 3 ? "B" : "C";
       prospects.push({
         ...base(pid), company, segment: sku.icp.split(" ")[0], site: `${company.toLowerCase().replace(/\s/g, "")}.com.br`,
-        instagram: `@${company.toLowerCase().replace(/\s/g, "")}`, decisionMaker: PEOPLE[i % PEOPLE.length],
-        role: ROLES[i % ROLES.length], contact: `(11) 9${String(8000 + i * 37).slice(0, 4)}-${String(1000 + i * 91).slice(0, 4)}`,
-        painSignal: PAINS[i % PAINS.length], priority, faucetId: fid, nextAction: "", notes: "",
+        instagram: `@${company.toLowerCase().replace(/\s/g, "")}`, decisionMaker: PEOPLE[i % PEOPLE.length]!,
+        role: ROLES[i % ROLES.length]!, contact: `(11) 9${String(8000 + i * 37).slice(0, 4)}-${String(1000 + i * 91).slice(0, 4)}`,
+        painSignal: PAINS[i % PAINS.length]!, priority, faucetId: fid, nextAction: "", notes: "",
       });
       const nextDate = stage >= 9 ? "" : addDays(today, (si % 4) - 1);
-      const nextAction = ["Enviar abordagem", "Qualificar", "Follow-up 1", "Follow-up", "Agendar diagnóstico", "Fazer diagnóstico", "Cobrar decisão da proposta", "Cobrar pagamento", "Acompanhar entrega", "Pedir indicação", "Oferecer expansão"][stage];
+      const nextAction = ["Enviar abordagem", "Qualificar", "Follow-up 1", "Follow-up", "Agendar diagnóstico", "Fazer diagnóstico", "Cobrar decisão da proposta", "Cobrar pagamento", "Acompanhar entrega", "Pedir indicação", "Oferecer expansão"][stage]!;
       opportunities.push({
         ...base(oid), prospectId: pid, faucetId: fid, title: `${sku.name} — ${company}`, stage, owner,
         value: sku.testTicket, nextAction, nextActionDate: nextDate, notes: "",
