@@ -104,7 +104,7 @@ export function createSeed(): DB {
       const owner = OWNERS[i % 3]!;
       const priority = stage >= 5 ? "A" : stage >= 3 ? "B" : "C";
       prospects.push({
-        ...base(pid), company, segment: sku.icp.split(" ")[0], site: `${company.toLowerCase().replace(/\s/g, "")}.com.br`,
+        ...base(pid), company, segment: sku.icp.split(" ")[0] ?? "", site: `${company.toLowerCase().replace(/\s/g, "")}.com.br`,
         instagram: `@${company.toLowerCase().replace(/\s/g, "")}`, decisionMaker: PEOPLE[i % PEOPLE.length]!,
         role: ROLES[i % ROLES.length]!, contact: `(11) 9${String(8000 + i * 37).slice(0, 4)}-${String(1000 + i * 91).slice(0, 4)}`,
         painSignal: PAINS[i % PAINS.length]!, priority, faucetId: fid, nextAction: "", notes: "",

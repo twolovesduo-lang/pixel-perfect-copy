@@ -23,7 +23,7 @@ export const Route = createFileRoute("/hoje")({
 function Hoje() {
   const db = useDB();
   const [text, setText] = useState("");
-  const [owner, setOwner] = useState(OWNERS[0]);
+  const [owner, setOwner] = useState<string>("Ana");
   const logs = [...db.dailyLogs].sort((a, b) => b.date.localeCompare(a.date) || b.createdAt.localeCompare(a.createdAt));
 
   return (

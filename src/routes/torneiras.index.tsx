@@ -37,7 +37,7 @@ function Torneiras() {
   const bName = new Map(db.brands.map((b) => [b.id, b.name]));
   const rows = db.faucets
     .map((f) => ({ f, m: idx.faucet.get(f.id)! }))
-    .sort((a, b) => SORTS[sort](b.m) - SORTS[sort](a.m));
+    .sort((a, b) => SORTS[sort]!(b.m) - SORTS[sort]!(a.m));
   const maxMph = Math.max(1, ...rows.map((r) => r.m.marginPerHour));
 
   return (
