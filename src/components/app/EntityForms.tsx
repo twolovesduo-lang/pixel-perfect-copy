@@ -194,7 +194,7 @@ export function FormsProvider({ children }: { children: ReactNode }) {
 
 function FormHost({ kind, initial, open, setOpen }: { kind: FormKind; initial: Record<string, unknown>; open: boolean; setOpen: (o: boolean) => void }) {
   const db = useDB();
-  const isNew = !initial.id;
+  const isNew = !initial["id"];
   return (
     <FormDialog
       open={open}
