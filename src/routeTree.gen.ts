@@ -10,11 +10,19 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AtividadesRouteImport } from './routes/atividades'
 import { Route as HojeRouteImport } from './routes/hoje'
+import { Route as PipelineRouteImport } from './routes/pipeline'
+import { Route as ProspectsRouteImport } from './routes/prospects'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AtividadesRoute = AtividadesRouteImport.update({
+  id: '/atividades',
+  path: '/atividades',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HojeRoute = HojeRouteImport.update({
@@ -22,31 +30,53 @@ const HojeRoute = HojeRouteImport.update({
   path: '/hoje',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PipelineRoute = PipelineRouteImport.update({
+  id: '/pipeline',
+  path: '/pipeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProspectsRoute = ProspectsRouteImport.update({
+  id: '/prospects',
+  path: '/prospects',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/atividades': typeof AtividadesRoute
   '/hoje': typeof HojeRoute
+  '/pipeline': typeof PipelineRoute
+  '/prospects': typeof ProspectsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/atividades': typeof AtividadesRoute
   '/hoje': typeof HojeRoute
+  '/pipeline': typeof PipelineRoute
+  '/prospects': typeof ProspectsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/atividades': typeof AtividadesRoute
   '/hoje': typeof HojeRoute
+  '/pipeline': typeof PipelineRoute
+  '/prospects': typeof ProspectsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/hoje'
+  fullPaths: '/' | '/atividades' | '/hoje' | '/pipeline' | '/prospects'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/hoje'
-  id: '__root__' | '/' | '/hoje'
+  to: '/' | '/atividades' | '/hoje' | '/pipeline' | '/prospects'
+  id: '__root__' | '/' | '/atividades' | '/hoje' | '/pipeline' | '/prospects'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AtividadesRoute: typeof AtividadesRoute
   HojeRoute: typeof HojeRoute
+  PipelineRoute: typeof PipelineRoute
+  ProspectsRoute: typeof ProspectsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +88,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/atividades': {
+      id: '/atividades'
+      path: '/atividades'
+      fullPath: '/atividades'
+      preLoaderRoute: typeof AtividadesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/hoje': {
       id: '/hoje'
       path: '/hoje'
@@ -65,12 +102,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HojeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pipeline': {
+      id: '/pipeline'
+      path: '/pipeline'
+      fullPath: '/pipeline'
+      preLoaderRoute: typeof PipelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prospects': {
+      id: '/prospects'
+      path: '/prospects'
+      fullPath: '/prospects'
+      preLoaderRoute: typeof ProspectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AtividadesRoute: AtividadesRoute,
   HojeRoute: HojeRoute,
+  PipelineRoute: PipelineRoute,
+  ProspectsRoute: ProspectsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
