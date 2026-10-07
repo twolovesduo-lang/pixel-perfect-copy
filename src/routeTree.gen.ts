@@ -14,6 +14,9 @@ import { Route as AtividadesRouteImport } from './routes/atividades'
 import { Route as HojeRouteImport } from './routes/hoje'
 import { Route as PipelineRouteImport } from './routes/pipeline'
 import { Route as ProspectsRouteImport } from './routes/prospects'
+import { Route as ScoreboardRouteImport } from './routes/scoreboard'
+import { Route as TorneirasIndexRouteImport } from './routes/torneiras.index'
+import { Route as TorneirasIdRouteImport } from './routes/torneiras.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +43,21 @@ const ProspectsRoute = ProspectsRouteImport.update({
   path: '/prospects',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ScoreboardRoute = ScoreboardRouteImport.update({
+  id: '/scoreboard',
+  path: '/scoreboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TorneirasIndexRoute = TorneirasIndexRouteImport.update({
+  id: '/torneiras/',
+  path: '/torneiras/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TorneirasIdRoute = TorneirasIdRouteImport.update({
+  id: '/torneiras/$id',
+  path: '/torneiras/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +65,9 @@ export interface FileRoutesByFullPath {
   '/hoje': typeof HojeRoute
   '/pipeline': typeof PipelineRoute
   '/prospects': typeof ProspectsRoute
+  '/scoreboard': typeof ScoreboardRoute
+  '/torneiras/$id': typeof TorneirasIdRoute
+  '/torneiras/': typeof TorneirasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +75,9 @@ export interface FileRoutesByTo {
   '/hoje': typeof HojeRoute
   '/pipeline': typeof PipelineRoute
   '/prospects': typeof ProspectsRoute
+  '/scoreboard': typeof ScoreboardRoute
+  '/torneiras/$id': typeof TorneirasIdRoute
+  '/torneiras': typeof TorneirasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +86,41 @@ export interface FileRoutesById {
   '/hoje': typeof HojeRoute
   '/pipeline': typeof PipelineRoute
   '/prospects': typeof ProspectsRoute
+  '/scoreboard': typeof ScoreboardRoute
+  '/torneiras/$id': typeof TorneirasIdRoute
+  '/torneiras/': typeof TorneirasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/atividades' | '/hoje' | '/pipeline' | '/prospects'
+  fullPaths:
+    | '/'
+    | '/atividades'
+    | '/hoje'
+    | '/pipeline'
+    | '/prospects'
+    | '/scoreboard'
+    | '/torneiras/$id'
+    | '/torneiras/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/atividades' | '/hoje' | '/pipeline' | '/prospects'
-  id: '__root__' | '/' | '/atividades' | '/hoje' | '/pipeline' | '/prospects'
+  to:
+    | '/'
+    | '/atividades'
+    | '/hoje'
+    | '/pipeline'
+    | '/prospects'
+    | '/scoreboard'
+    | '/torneiras/$id'
+    | '/torneiras'
+  id:
+    | '__root__'
+    | '/'
+    | '/atividades'
+    | '/hoje'
+    | '/pipeline'
+    | '/prospects'
+    | '/scoreboard'
+    | '/torneiras/$id'
+    | '/torneiras/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +129,9 @@ export interface RootRouteChildren {
   HojeRoute: typeof HojeRoute
   PipelineRoute: typeof PipelineRoute
   ProspectsRoute: typeof ProspectsRoute
+  ScoreboardRoute: typeof ScoreboardRoute
+  TorneirasIdRoute: typeof TorneirasIdRoute
+  TorneirasIndexRoute: typeof TorneirasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +171,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProspectsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/scoreboard': {
+      id: '/scoreboard'
+      path: '/scoreboard'
+      fullPath: '/scoreboard'
+      preLoaderRoute: typeof ScoreboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/torneiras/': {
+      id: '/torneiras/'
+      path: '/torneiras'
+      fullPath: '/torneiras/'
+      preLoaderRoute: typeof TorneirasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/torneiras/$id': {
+      id: '/torneiras/$id'
+      path: '/torneiras/$id'
+      fullPath: '/torneiras/$id'
+      preLoaderRoute: typeof TorneirasIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +201,9 @@ const rootRouteChildren: RootRouteChildren = {
   HojeRoute: HojeRoute,
   PipelineRoute: PipelineRoute,
   ProspectsRoute: ProspectsRoute,
+  ScoreboardRoute: ScoreboardRoute,
+  TorneirasIdRoute: TorneirasIdRoute,
+  TorneirasIndexRoute: TorneirasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
