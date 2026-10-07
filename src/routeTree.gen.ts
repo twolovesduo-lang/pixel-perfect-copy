@@ -11,7 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AtividadesRouteImport } from './routes/atividades'
+import { Route as CatalogoRouteImport } from './routes/catalogo'
+import { Route as EnergiaRouteImport } from './routes/energia'
+import { Route as EvidenciasRouteImport } from './routes/evidencias'
 import { Route as HojeRouteImport } from './routes/hoje'
+import { Route as MarcasRouteImport } from './routes/marcas'
+import { Route as MetasRouteImport } from './routes/metas'
 import { Route as PipelineRouteImport } from './routes/pipeline'
 import { Route as ProspectsRouteImport } from './routes/prospects'
 import { Route as ScoreboardRouteImport } from './routes/scoreboard'
@@ -28,9 +33,34 @@ const AtividadesRoute = AtividadesRouteImport.update({
   path: '/atividades',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogoRoute = CatalogoRouteImport.update({
+  id: '/catalogo',
+  path: '/catalogo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnergiaRoute = EnergiaRouteImport.update({
+  id: '/energia',
+  path: '/energia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EvidenciasRoute = EvidenciasRouteImport.update({
+  id: '/evidencias',
+  path: '/evidencias',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HojeRoute = HojeRouteImport.update({
   id: '/hoje',
   path: '/hoje',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarcasRoute = MarcasRouteImport.update({
+  id: '/marcas',
+  path: '/marcas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MetasRoute = MetasRouteImport.update({
+  id: '/metas',
+  path: '/metas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PipelineRoute = PipelineRouteImport.update({
@@ -62,7 +92,12 @@ const TorneirasIdRoute = TorneirasIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/atividades': typeof AtividadesRoute
+  '/catalogo': typeof CatalogoRoute
+  '/energia': typeof EnergiaRoute
+  '/evidencias': typeof EvidenciasRoute
   '/hoje': typeof HojeRoute
+  '/marcas': typeof MarcasRoute
+  '/metas': typeof MetasRoute
   '/pipeline': typeof PipelineRoute
   '/prospects': typeof ProspectsRoute
   '/scoreboard': typeof ScoreboardRoute
@@ -72,7 +107,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/atividades': typeof AtividadesRoute
+  '/catalogo': typeof CatalogoRoute
+  '/energia': typeof EnergiaRoute
+  '/evidencias': typeof EvidenciasRoute
   '/hoje': typeof HojeRoute
+  '/marcas': typeof MarcasRoute
+  '/metas': typeof MetasRoute
   '/pipeline': typeof PipelineRoute
   '/prospects': typeof ProspectsRoute
   '/scoreboard': typeof ScoreboardRoute
@@ -83,7 +123,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/atividades': typeof AtividadesRoute
+  '/catalogo': typeof CatalogoRoute
+  '/energia': typeof EnergiaRoute
+  '/evidencias': typeof EvidenciasRoute
   '/hoje': typeof HojeRoute
+  '/marcas': typeof MarcasRoute
+  '/metas': typeof MetasRoute
   '/pipeline': typeof PipelineRoute
   '/prospects': typeof ProspectsRoute
   '/scoreboard': typeof ScoreboardRoute
@@ -95,7 +140,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/atividades'
+    | '/catalogo'
+    | '/energia'
+    | '/evidencias'
     | '/hoje'
+    | '/marcas'
+    | '/metas'
     | '/pipeline'
     | '/prospects'
     | '/scoreboard'
@@ -105,7 +155,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/atividades'
+    | '/catalogo'
+    | '/energia'
+    | '/evidencias'
     | '/hoje'
+    | '/marcas'
+    | '/metas'
     | '/pipeline'
     | '/prospects'
     | '/scoreboard'
@@ -115,7 +170,12 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/atividades'
+    | '/catalogo'
+    | '/energia'
+    | '/evidencias'
     | '/hoje'
+    | '/marcas'
+    | '/metas'
     | '/pipeline'
     | '/prospects'
     | '/scoreboard'
@@ -126,7 +186,12 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AtividadesRoute: typeof AtividadesRoute
+  CatalogoRoute: typeof CatalogoRoute
+  EnergiaRoute: typeof EnergiaRoute
+  EvidenciasRoute: typeof EvidenciasRoute
   HojeRoute: typeof HojeRoute
+  MarcasRoute: typeof MarcasRoute
+  MetasRoute: typeof MetasRoute
   PipelineRoute: typeof PipelineRoute
   ProspectsRoute: typeof ProspectsRoute
   ScoreboardRoute: typeof ScoreboardRoute
@@ -150,11 +215,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AtividadesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo': {
+      id: '/catalogo'
+      path: '/catalogo'
+      fullPath: '/catalogo'
+      preLoaderRoute: typeof CatalogoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/energia': {
+      id: '/energia'
+      path: '/energia'
+      fullPath: '/energia'
+      preLoaderRoute: typeof EnergiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/evidencias': {
+      id: '/evidencias'
+      path: '/evidencias'
+      fullPath: '/evidencias'
+      preLoaderRoute: typeof EvidenciasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/hoje': {
       id: '/hoje'
       path: '/hoje'
       fullPath: '/hoje'
       preLoaderRoute: typeof HojeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marcas': {
+      id: '/marcas'
+      path: '/marcas'
+      fullPath: '/marcas'
+      preLoaderRoute: typeof MarcasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/metas': {
+      id: '/metas'
+      path: '/metas'
+      fullPath: '/metas'
+      preLoaderRoute: typeof MetasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pipeline': {
@@ -198,7 +298,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AtividadesRoute: AtividadesRoute,
+  CatalogoRoute: CatalogoRoute,
+  EnergiaRoute: EnergiaRoute,
+  EvidenciasRoute: EvidenciasRoute,
   HojeRoute: HojeRoute,
+  MarcasRoute: MarcasRoute,
+  MetasRoute: MetasRoute,
   PipelineRoute: PipelineRoute,
   ProspectsRoute: ProspectsRoute,
   ScoreboardRoute: ScoreboardRoute,
